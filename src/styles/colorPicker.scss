@@ -1,0 +1,16 @@
+.colorPicker {
+	.colorsValue {
+		display: flex;
+
+		.colorText {
+			margin-right: 10px;
+
+		}
+
+		.colorSquare {
+			width: 25px;
+			height: 25px;
+
+		}
+	}
+}

@@ -1,0 +1,16 @@
+.typeChoosing {
+	display: flex;
+
+	.allTypes {
+		display: flex;
+
+		.typeElem {
+			margin-right: 10px;
+
+			.activeType {
+				background: rgb(121, 121, 121);
+			}
+		}
+	}
+
+}
