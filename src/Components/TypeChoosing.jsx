@@ -5,7 +5,7 @@ const TypeChoosing = ({ types, activeType, setActiveType, text }) => {
 
 	return (
 		<div className='typeChoosing'>
-			<div className="whichType">{text}</div>
+			<div className="whichType">{text}:</div>
 			<div className="allTypes">		{types.map((type) =>
 				<TypeElem type={type} key={type} activeType={activeType} setActiveType={setActiveType} />
 			)}</div>
@@ -15,9 +15,9 @@ const TypeChoosing = ({ types, activeType, setActiveType, text }) => {
 
 const TypeElem = ({ type, activeType, setActiveType }) => {
 	return (
-		<div className='typeElem'>
+		<div className={activeType === type ? "typeElem activeType" : 'typeElem'} >
 			<div onClick={() => setActiveType(type)}
-				className={activeType === type ? "typeName activeType" : "typeName"}>{type}</div>
+				className="typeName">{type}</div>
 		</div>
 	)
 }

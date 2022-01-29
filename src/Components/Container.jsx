@@ -5,6 +5,7 @@ import RangeSlider from './RangeSlider';
 import TypeChoosing from './TypeChoosing';
 import { getQrCode } from './../api/api';
 import { saveAs } from 'file-saver'
+import '../styles/container.scss'
 
 const Container = () => {
 	const qrDownloadTypes = [".png", ".jpg", ".svg"]
@@ -18,8 +19,19 @@ const Container = () => {
 	const [indent, setIndent] = useState(0);
 	const [imgUrl, setImgUrl] = useState('')
 	const [isReady, setIsReady] = useState(false)
+
+	const [isActiveColorPicker, setIsActiveColorPicker] = useState(false)
+	const [isActiveBgColorPicker, setIsActiveBgColorPicker] = useState(false)
+	const closeColorPickers = () => {
+		console.log('qq');
+		if (isActiveColorPicker === true) {
+			setIsActiveColorPicker(false)
+		}
+		if (isActiveBgColorPicker === true) {
+			setIsActiveBgColorPicker(false)
+		}
+	}
 	useEffect(() => {
-		console.log(isReady);
 
 		if (isReady == true) {
 			const getQr = async () => {
@@ -31,33 +43,57 @@ const Container = () => {
 		}
 
 	}, [isReady]);
+	// const stopClosing = (e) => {
+	// 	console.log('qq');
+	// 	e.preventDefault()
 
+	// 	e.stopPropagation()
+	// }
 	return (
-		<div>
-			<Input text={text} setText={setText} />
-			<ColorPicker text={'Color'} color={color} setColor={setColor} />
-			<ColorPicker text={'Background color'} color={bgColor} setColor={setBgColor} />
-			<TypeChoosing text={'Types of download'} types={qrDownloadTypes}
-				activeType={downloadType} setActiveType={setDownloadType} />
+		<div onClick={closeColorPickers} className="wrapper">
+			<div className='container'>
+				<div className="side">
+					<Input text={text} setText={setText} />
+					<ColorPicker
+						text={'Color'} color={color} setColor={setColor}
+						isActiveColorPicker={isActiveColorPicker} setIsActiveColorPicker={setIsActiveColorPicker}
+					/>
 
-			<TypeChoosing text={'Measurement system'} types={sizeTypes}
-				activeType={sizeType} setActiveType={setSizeType} />
+					<ColorPicker
+						text={'Background color'} color={bgColor} setColor={setBgColor}
+						isActiveColorPicker={isActiveBgColorPicker} setIsActiveColorPicker={setIsActiveBgColorPicker}
 
-			<RangeSlider text={'Size'} minValue={sizeType === 'px' ? 38 : 1}
-				maxValue={sizeType === 'px' ? 1000 : 26} sliderValue={sizeType === 'px' ? 250 : 10}
-				setSliderValue={setSize} type={sizeType === 'px' ? 'px' : 'cm'}
-			/>
-			<RangeSlider text={'Indent'} minValue={0}
-				maxValue={19}
-				sliderValue={1}
-				setSliderValue={setIndent} type={''}
-			/>
-			<button onClick={() => setIsReady(true)}>GET QR CODE</button>
-			<div><img src={imgUrl} alt="" /></div>
-			{
-				imgUrl && <Index imgUrl={imgUrl} downloadType={downloadType} />
-			}
+					/>
+					<TypeChoosing text={'Types of download'} types={qrDownloadTypes}
+						activeType={downloadType} setActiveType={setDownloadType} />
 
+					<TypeChoosing text={'Measurement system'} types={sizeTypes}
+						activeType={sizeType} setActiveType={setSizeType} />
+
+					<RangeSlider text={'Size'} minValue={sizeType === 'px' ? 38 : 1}
+						maxValue={sizeType === 'px' ? 1000 : 26} sliderValue={sizeType === 'px' ? 250 : 10}
+						setSliderValue={setSize} type={sizeType === 'px' ? 'px' : 'cm'}
+					/>
+					<RangeSlider text={'Indent'} minValue={0}
+						maxValue={19}
+						sliderValue={1}
+						setSliderValue={setIndent} type={''}
+					/>
+				</div>
+
+				<div className="side side2">
+					<div className='qrCode'><img src={imgUrl ? imgUrl : '../qr.png'} alt="" /></div>
+					<div className="generateBtn">
+						<button onClick={() => setIsReady(true)}>Generate qr code</button>
+
+					</div>
+					{
+						imgUrl && <Index imgUrl={imgUrl} downloadType={downloadType} />
+					}
+				</div>
+
+
+			</div>
 		</div>
 	);
 };
@@ -71,5 +107,5 @@ const Index = ({ imgUrl, downloadType }) => {
 		saveAs(imgUrl, `qr${downloadType}`) // Put your image url here.
 	}
 
-	return <button onClick={downloadImage}>Download!</button>
+	return <div className='downloadBtn'><button onClick={downloadImage}>Download <span>⭳</span></button></div>
 }

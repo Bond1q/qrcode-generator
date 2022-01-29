@@ -1,16 +1,38 @@
 .typeChoosing {
 	display: flex;
 
+	margin-bottom: 30px;
+	align-items: center;
+
+	.whichType {
+		margin-right: 15px;
+	}
+
 	.allTypes {
 		display: flex;
+		align-items: center;
 
 		.typeElem {
-			margin-right: 10px;
+			color: rgb(102, 102, 102);
 
-			.activeType {
-				background: rgb(121, 121, 121);
+			margin-right: 15px;
+			cursor: pointer;
+
+			&:hover {
+				color: rgb(0, 0, 0);
+
 			}
+
+
+
+		}
+
+		.activeType {
+			color: rgb(0, 0, 0);
+			cursor: default;
+
 		}
 	}
+
 
 }
