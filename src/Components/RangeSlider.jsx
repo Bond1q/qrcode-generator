@@ -5,17 +5,20 @@ const RangeSlider = ({ minValue, maxValue, text, sliderValue, setSliderValue, ty
 	const [activeSliderValue, setActiveSliderValue] = useState(sliderValue)
 	const onChangeSlider = (e) => {
 		setActiveSliderValue(e.target.value)
+		setSliderValue(e.target.value)
+
 	}
 	useEffect(() => {
 		setActiveSliderValue(sliderValue)
 	}, [sliderValue]);
 
 	const inputOnBlurHandler = () => {
-		if (activeSliderValue >= minValue && activeSliderValue <= maxValue && Number.isInteger(+activeSliderValue)) {
-			setSliderValue(activeSliderValue)
-		} else {
-			setActiveSliderValue(sliderValue)
-		}
+		// if (activeSliderValue >= minValue && activeSliderValue <= maxValue && Number.isInteger(+activeSliderValue)) {
+		// 	setSliderValue(activeSliderValue)
+		// } else {
+		// 	setActiveSliderValue(sliderValue)
+		// }
+		console.log();
 	}
 	return (
 		<div className='rangeSlider'>
@@ -44,4 +47,4 @@ const RangeSlider = ({ minValue, maxValue, text, sliderValue, setSliderValue, ty
 	);
 };
 
-export default RangeSlider;
+export default React.memo(RangeSlider);

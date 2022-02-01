@@ -11,13 +11,21 @@ const Input = ({ text, setText }) => {
 			setText(inputValue.trim())
 		}
 	}
+	const keyPressHandler = (e) => {
+		if (e.keyCode === 13 && inputValue != "") {
+			e.preventDefault();
+			setText(inputValue.trim())
+
+		}
+	}
 	return (
 		<div className='input'>
 			<textarea placeholder='Write your text or url' type="url"
 				value={inputValue} onChange={onInputChange}
 				onBlur={onSetText}
+				onKeyDown={keyPressHandler}
 			/>
 		</div>
 	);
 };
-export default Input;
+export default React.memo(Input);

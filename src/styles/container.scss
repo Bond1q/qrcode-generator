@@ -2,84 +2,132 @@
 	width: 100%;
 
 	.container {
-		padding: 20px;
 		background: rgb(255, 255, 255);
+		background: rgb(232, 238, 242);
+
 		border-radius: 10px;
 		width: 900px;
 		margin: 0 auto;
 		margin-top: 50px;
 		min-height: 500px;
-		box-shadow: 0px 0px 20px 10px rgba(34, 60, 80, 0.2);
+		box-shadow: 0px 0px 20px 10px rgb(32, 42, 90);
+		// box-shadow: 0px 0px 20px 10px rgb(59, 100, 78);
 		display: flex;
 		justify-content: space-between;
 
+		.side1 {
+			background: rgb(232, 238, 242);
+			padding: 20px;
+
+		}
 
 		.side2 {
-			margin-top: 70px;
-			margin-right: 50px;
+
+			padding: 60px;
+			// border-left: 1px solid black;
+			// padding-left: 70px;
+			background: rgb(255, 255, 255);
 
 			.qrCode {
 				border: 2px solid rgb(63, 63, 63);
-				width: 200px;
-				height: 200px;
+				width: 270px;
+				height: 270px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				border-radius: 5px;
+				border-radius: 3px;
 
 				img {
-					// display: block;
+					max-width: 270px;
+				}
+			}
 
-					max-width: 195px;
+			.btns {
+				margin-top: 20px;
 
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					font-size: 16px;
+					width: 125px;
+
+					border: none;
+					padding: 5px 0;
 					border-radius: 5px;
+					cursor: pointer;
+					color: #ffff;
+					height: 40px;
 				}
 			}
 
 			.generateBtn {
-				margin-top: 5px;
 
 				button {
-					width: 100%;
-					background: rgb(248, 248, 248);
-					border: 2px solid rgb(85, 85, 85);
-					padding: 5px 0;
-					border-radius: 5px;
-					cursor: pointer;
+					background: rgb(26, 161, 251);
 
 					&:hover {
-						border: 2px solid rgb(29, 29, 29);
-						background: rgb(240, 240, 240);
-
+						background: rgb(3, 137, 226);
 
 					}
 				}
 			}
 
 			.downloadBtn {
-				margin-top: 10px;
 
 				button {
-					width: 100%;
-					background: rgb(248, 248, 248);
-					border: 2px solid rgb(85, 85, 85);
-					padding: 8px 0;
-					border-radius: 5px;
-					cursor: pointer;
+					background: rgb(19, 199, 79);
+					line-height: 0;
 
 					&:hover {
-						border: 2px solid rgb(29, 29, 29);
-						background: rgb(240, 240, 240);
-
+						background: rgb(15, 173, 68);
 
 					}
 				}
 
-				span {
-					font-size: 20px;
+			}
+
+			.disableBtn {
+				button {
+					background: rgb(167, 166, 166);
+					line-height: 0;
+					cursor: default;
+
+					&:hover {
+						background: rgb(167, 166, 166);
+
+					}
 				}
 			}
 		}
 
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.wrapper {
+		.container {
+			margin-top: 0px;
+			max-width: 500px;
+			// overflow-x: hidden;	
+			display: flex;
+			flex-direction: column-reverse;
+
+			.side2 {
+				.qrCode {
+					margin: 0 auto;
+				}
+
+				.btns {
+					justify-content: center;
+
+					.generateBtn {
+						margin-right: 20px;
+					}
+
+				}
+
+			}
+		}
 	}
 }

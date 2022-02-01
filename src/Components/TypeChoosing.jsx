@@ -5,7 +5,7 @@ const TypeChoosing = ({ types, activeType, setActiveType, text }) => {
 
 	return (
 		<div className='typeChoosing'>
-			<div className="whichType">{text}:</div>
+			<div className="whichType">{text}</div>
 			<div className="allTypes">		{types.map((type) =>
 				<TypeElem type={type} key={type} activeType={activeType} setActiveType={setActiveType} />
 			)}</div>
@@ -22,4 +22,4 @@ const TypeElem = ({ type, activeType, setActiveType }) => {
 	)
 }
 
-export default TypeChoosing;
+export default React.memo(TypeChoosing);

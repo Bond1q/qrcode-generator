@@ -6,11 +6,16 @@
 
 	.whichType {
 		margin-right: 15px;
+		font-size: 20px;
+
 	}
 
 	.allTypes {
 		display: flex;
 		align-items: center;
+		font-weight: 500;
+		justify-content: space-between;
+
 
 		.typeElem {
 			color: rgb(102, 102, 102);
@@ -23,7 +28,10 @@
 
 			}
 
+			&:last-child {
+				margin-right: 0px;
 
+			}
 
 		}
 

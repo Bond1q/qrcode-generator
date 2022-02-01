@@ -2,31 +2,33 @@
 	margin-bottom: 30px;
 
 	.sliderInfo {
-		font-size: 16px;
+		font-size: 18px;
 		display: flex;
+		align-items: baseline;
 
 		.text {
 			margin-bottom: 8px;
+			font-size: 20px;
 
 
 		}
 
 		.sliderValue {
-			font-size: 16px;
+			font-size: 18px;
 			font-weight: 500;
 			margin-bottom: 3px;
 
 			span {
-				font-size: 16px;
+				font-size: 18px;
 
 			}
 
 			input {
 				font-weight: 500;
-				font-size: 16px;
+				font-size: 18px;
 				border: none;
 				margin-left: 5px;
-
+				background: none;
 				text-align: left;
 
 
@@ -35,14 +37,14 @@
 
 		.fourDecimals {
 			input {
-				width: 42px;
+				width: 45px;
 
 			}
 		}
 
 		.threeDecimals {
 			input {
-				width: 32px;
+				width: 35px;
 
 			}
 		}
@@ -50,14 +52,14 @@
 
 		.twoDecimals {
 			input {
-				width: 22px;
+				width: 25px;
 
 			}
 		}
 
 		.oneDecimal {
 			input {
-				width: 12px;
+				width: 16px;
 
 			}
 		}
@@ -94,5 +96,22 @@
 		border-radius: 50%;
 		background: #000000;
 		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.rangeSlider {
+		margin-bottom: 40px;
+
+		.sliderInfo {
+
+
+			.text {
+				margin-bottom: 15px;
+				font-size: 20px;
+
+
+			}
+		}
 	}
 }

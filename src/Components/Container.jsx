@@ -6,24 +6,25 @@ import TypeChoosing from './TypeChoosing';
 import { getQrCode } from './../api/api';
 import { saveAs } from 'file-saver'
 import '../styles/container.scss'
+import classNames from 'classnames';
 
 const Container = () => {
-	const qrDownloadTypes = [".png", ".jpg", ".svg"]
+	const qrDownloadTypes = [".png", ".jpg", ".svg", ".gif", ".jpeg"]
 	const sizeTypes = ['cm', 'px']
-	const [text, setText] = useState('Test');
-	const [color, setColor] = useState('#ff542f');
-	const [bgColor, setBgColor] = useState('#116a68')
+	const [text, setText] = useState('');
+	const [color, setColor] = useState('#000000');
+	const [bgColor, setBgColor] = useState('#ffffff')
 	const [downloadType, setDownloadType] = useState(".png")
 	const [sizeType, setSizeType] = useState('px')
 	const [size, setSize] = useState(250);
 	const [indent, setIndent] = useState(0);
 	const [imgUrl, setImgUrl] = useState('')
 	const [isReady, setIsReady] = useState(false)
+	const [isChanged, setIsChanged] = useState(false)
 
 	const [isActiveColorPicker, setIsActiveColorPicker] = useState(false)
 	const [isActiveBgColorPicker, setIsActiveBgColorPicker] = useState(false)
 	const closeColorPickers = () => {
-		console.log('qq');
 		if (isActiveColorPicker === true) {
 			setIsActiveColorPicker(false)
 		}
@@ -35,24 +36,39 @@ const Container = () => {
 
 		if (isReady == true) {
 			const getQr = async () => {
-				const res = await getQrCode(text, size, color, bgColor, indent, downloadType)
-				setImgUrl(res)
+				if (sizeType === 'cm') {
+					const newSize = Math.round(size * 38)
+					const res = await getQrCode(text, newSize, color, bgColor, indent, downloadType)
+					setImgUrl(res)
+
+				} else {
+
+					const res = await getQrCode(text, size, color, bgColor, indent, downloadType)
+					setImgUrl(res)
+
+				}
 			}
 			getQr()
 			setIsReady(false)
+			setIsChanged(false)
+
 		}
 
 	}, [isReady]);
-	// const stopClosing = (e) => {
-	// 	console.log('qq');
-	// 	e.preventDefault()
 
-	// 	e.stopPropagation()
-	// }
+
+	useEffect(() => {
+		if (text != '') {
+			setIsChanged(true)
+		}
+	}, [text, size, color, bgColor, indent, downloadType]);
+
+
+
 	return (
 		<div onClick={closeColorPickers} className="wrapper">
 			<div className='container'>
-				<div className="side">
+				<div className="side side1">
 					<Input text={text} setText={setText} />
 					<ColorPicker
 						text={'Color'} color={color} setColor={setColor}
@@ -64,10 +80,10 @@ const Container = () => {
 						isActiveColorPicker={isActiveBgColorPicker} setIsActiveColorPicker={setIsActiveBgColorPicker}
 
 					/>
-					<TypeChoosing text={'Types of download'} types={qrDownloadTypes}
+					<TypeChoosing text={'Type of download:'} types={qrDownloadTypes}
 						activeType={downloadType} setActiveType={setDownloadType} />
 
-					<TypeChoosing text={'Measurement system'} types={sizeTypes}
+					<TypeChoosing text={'Measurement system:'} types={sizeTypes}
 						activeType={sizeType} setActiveType={setSizeType} />
 
 					<RangeSlider text={'Size'} minValue={sizeType === 'px' ? 38 : 1}
@@ -83,13 +99,15 @@ const Container = () => {
 
 				<div className="side side2">
 					<div className='qrCode'><img src={imgUrl ? imgUrl : '../qr.png'} alt="" /></div>
-					<div className="generateBtn">
-						<button onClick={() => setIsReady(true)}>Generate qr code</button>
+					<div className="btns">
+						<div className={classNames('generateBtn', { disableBtn: !isChanged })} >
+							<button disabled={!isChanged} onClick={() => setIsReady(true)}>Create QR code</button>
+
+						</div>
+						<Index imgUrl={imgUrl} downloadType={downloadType} />
 
 					</div>
-					{
-						imgUrl && <Index imgUrl={imgUrl} downloadType={downloadType} />
-					}
+
 				</div>
 
 
@@ -102,10 +120,12 @@ export default Container;
 
 
 const Index = ({ imgUrl, downloadType }) => {
-	console.log(imgUrl);
 	const downloadImage = () => {
-		saveAs(imgUrl, `qr${downloadType}`) // Put your image url here.
+		saveAs(imgUrl, `QR${downloadType}`) // Put your image url here.
 	}
 
-	return <div className='downloadBtn'><button onClick={downloadImage}>Download <span>⭳</span></button></div>
+	return <div className={classNames('downloadBtn', { disableBtn: imgUrl === '' })} >
+		<button disabled={imgUrl === ''} onClick={downloadImage}>Download <span>⭳</span></button>
+
+	</div>
 }
