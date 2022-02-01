@@ -98,7 +98,7 @@ const Container = () => {
 				</div>
 
 				<div className="side side2">
-					<div className='qrCode'><img src={imgUrl ? imgUrl : '../qr.png'} alt="" /></div>
+					<div className='qrCode'><img src={imgUrl ? imgUrl : 'https://bond1q.github.io/qrcode-generator/qr.png'} alt="" /></div>
 					<div className="btns">
 						<div className={classNames('generateBtn', { disableBtn: !isChanged })} >
 							<button disabled={!isChanged} onClick={() => setIsReady(true)}>Create QR code</button>

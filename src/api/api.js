@@ -4,9 +4,9 @@ export const getQrCode = async (text, size, color, bgColor, qzone, downloadType)
 	const correctColor = color.slice(1, color.length)
 	const correctBgColor = bgColor.slice(1, bgColor.length)
 	const correctDownloadType = downloadType.slice(1, downloadType.length)
-	let url = `http://api.qrserver.com/v1/create-qr-code/?data=${text}&size=${size}x${size}&color=${correctColor}&bgcolor=${correctBgColor}&qzone=${qzone}&format=${correctDownloadType}${downloadType}`
+	let url = `https://api.qrserver.com/v1/create-qr-code/?data=${text}&size=${size}x${size}&color=${correctColor}&bgcolor=${correctBgColor}&qzone=${qzone}&format=${correctDownloadType}${downloadType}`
 	if (correctDownloadType === 'svg') {
-		url = `http://api.qrserver.com/v1/create-qr-code/?data=${text}&size=${size}x${size}&color=${correctColor}&bgcolor=${correctBgColor}&qzone=${qzone}&format=${correctDownloadType}`
+		url = `https://api.qrserver.com/v1/create-qr-code/?data=${text}&size=${size}x${size}&color=${correctColor}&bgcolor=${correctBgColor}&qzone=${qzone}&format=${correctDownloadType}`
 
 	}
 	console.log(url);
